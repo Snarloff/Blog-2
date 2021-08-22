@@ -11,7 +11,10 @@
           telemedicina no Brasil e fora do país (atendo em português, espanhol e
           inglês).
         </p>
-        <router-link to="/blog/home" class="about__link">Saber mais →</router-link>
+        <router-link :to="{name: 'ShowSubs', query: {
+          category: 'sobre-mim',
+          id: 1
+        }}" class="about__link">Saber mais →</router-link>
       </div>
     </div>
     <div class="about__personal-data">
@@ -37,7 +40,39 @@
     
   </section>
 </template>
+<script>
 
+  import axios from 'axios'
+
+const url = "https://miguelblog-api.glitch.me";
+  export default {
+    data() {
+      return {
+        data: undefined,
+        subcategories: undefined,
+        error: undefined,
+        search: undefined,
+      }
+    },
+    created: async function(){
+      await axios.get(String(url) + '/api/v1/categories').then((data) => {
+
+        if (!data['data']['status']) {
+          this.error = data['data']['data']
+        }
+        this.data = data['data']['data']
+      })
+
+      await axios.get(String(url) + '/api/v1/subcategories').then((sub) => {
+        if (!sub['data']['status']) {
+          this.error = sub['data']['data']
+        }
+        this.subcategories = sub['data']['data']
+      })
+    }
+  }
+
+</script>
 <style scoped>
 * {
   font-family: Telegraf-Regular , sans-serif;

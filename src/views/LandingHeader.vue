@@ -22,14 +22,13 @@
       <div class="header__infos">
         <h1 class="header__title">Dermatologista <br> </h1>
         <h1 class="header__title">Dr. Miguel Ceccarelli</h1>
-        <h2 class="header__subtitle">em Rio de Janeiro</h2>
+        <h2 class="header__subtitle">no Rio de Janeiro</h2>
         <p class="header__text">
           Cuidar das unhas e pele é cuidar de si mesmo, agende uma consulta e vamos resgatar o que há de melhor em você.
         </p>
         <a
           title="agendar consulta com Dr. Miguel Ceccarelli"
-          href="https://wa.me/5521992189718?%20text=Ola,%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr%20Ceccarelli"
-          target="_blank"
+          href="#appointment"
           class="header__button"
           >Agendar</a
         >

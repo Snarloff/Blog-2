@@ -32,18 +32,6 @@
       BlogSidebar,
       BlogCardVideos,
       Footer
-    },
-    metaInfo: {
-      title: 'Miguel Blog (testando)',
-      htmlAttrs: {
-        lang: 'pt-br',
-        amp: true
-      },
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'An example Vue application with vue-meta.' },
-      ]
     }
   }
 </script>

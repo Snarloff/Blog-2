@@ -1,18 +1,15 @@
 <template>
   <section class="info-bar">
     <div class="info-bar__container">
-
-      <!-- O erro ta aqui -->
-
-      <!-- <figure class="menu-mobile-img__container">
-        <router-link :to="{name: 'Home'}" class="menu-mobile__link">
+      <figure class="menu-mobile-img__container">
+        <router-link to="/" class="menu-mobile__link">
           <img
             class="menu-mobile__img"
             src="../assets/icon.png
             "
           />
         </router-link>
-      </figure> -->
+      </figure>
       <ul class="info-bar__item">
          <li class="info-bar__list">
                <a

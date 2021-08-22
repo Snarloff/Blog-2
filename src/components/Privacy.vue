@@ -28,7 +28,7 @@
       nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas
       desses sites e não podemos aceitar responsabilidade por suas respectivas
       <a href="https://politicaprivacidade.com" target="_BLANK"
-      >políticas de privacidade</a
+        >políticas de privacidade</a
       >.
     </p>
     <p>
@@ -180,7 +180,7 @@
       </li>
       <li>B) Não difundir propaganda ou conteúdo de natureza racista, xenofóbica,
         ou casas de apostas legais (ex.:<a
-        href="https://ondeapostar.pt/review/betano/"
+          href="https://ondeapostar.pt/review/betano/"
         >Betano</a>), jogos de sorte e azar, qualquer tipo de pornografia ilegal, de
         apologia ao terrorismo ou contra os direitos humanos;
       </li>

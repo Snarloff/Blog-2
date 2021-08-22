@@ -37,14 +37,11 @@
 </template>
 
 <script>
-  // import { Slide } from 'vue-burger-menu'
+
   import axios from 'axios'
 
 const url = "https://miguelblog-api.glitch.me";
   export default {
-    components: {
-      // Slide
-    },
     data() {
       return {
         data: undefined,

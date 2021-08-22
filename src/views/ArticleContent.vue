@@ -6,7 +6,7 @@
 
       <p class="blog__text">{{ short }}</p>
 
-      <div v-html="body">
+      <div id="container" class="article__container" v-html="body">
         
       </div>
 
@@ -31,7 +31,6 @@ const url = "https://miguelblog-api.glitch.me";
         image: undefined,
         slug: undefined,
         body: undefined,
-        keys: undefined,
         data: undefined
       }
     },
@@ -61,12 +60,11 @@ const url = "https://miguelblog-api.glitch.me";
         this.short = this.data[0]['short']
         this.image = this.data[0]['image']
         this.slug = this.data[0]['slug']
-        this.keys = this.data[0]['keys']
         this.body = this.data[0]['body']
       })
       }
-    },
-}
+    }
+  }
 </script>
 
 <style scoped>
@@ -111,6 +109,12 @@ const url = "https://miguelblog-api.glitch.me";
   border-radius: 0.5rem;
   display: grid;
   margin: auto;
+
+}
+#container.article__container  h2  span{
+    font-size: 37px !important;
+  font-style: normal;
+  font-weight: 400;
 
 }
 
