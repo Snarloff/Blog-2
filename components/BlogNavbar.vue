@@ -82,7 +82,7 @@
         <div class="menu-mobile__container" ref="nav">
           <ul class="menu-mobile__menu">
             <li class="menu__card">
-              <router-link to="/" class="menu__link">
+              <router-link :to="localePath('/')" class="menu__link">
             <img class="menu__img" alt="Ilustração do Dermatologista, Miguel Ceccarelli" src="~/assets/capa--destaque.png">
 
                 <p class="menu__text">Home</p>
@@ -90,7 +90,7 @@
             </li>
 
             <li class="menu__card" v-for="category in data" :key="category.id">
-               <router-link class="menu__link" to="/">
+               <router-link class="menu__link" :to="localePath('/')">
             <img class="menu__img" alt="Ilustração do Dermatologista, Miguel Ceccarelli" :src="category.image">
 
                 <h2 class="menu__text">{{ category.title }}</h2>

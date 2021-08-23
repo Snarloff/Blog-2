@@ -21,9 +21,9 @@
         </li>
 
         <li class="menu__card" v-for="category in data" :key="category.id">
-          <router-link class="menu__link" :to="{name: 'blog-category-id', params: {
+          <router-link class="menu__link" :to="localePath({name: 'blog-category-id', params: {
             id: category.id
-          }}">
+          }})">
             <img class="menu__img" alt="Ilustração do Dermatologista, Miguel Ceccarelli" :src="category.image">
             <p class="menu__text">{{ category.title }}</p>
 

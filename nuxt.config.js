@@ -38,8 +38,33 @@ export default {
     [
       "@nuxtjs/i18n",
       {
-        locales: ['br', 'en', 'es'],
-        defaultLocale: 'pt-br',
+        locales: [
+          {
+            code: 'br',
+            iso: 'pt-BR',
+            name: 'Português'
+          },
+          {
+            code: 'en',
+            iso: 'en-US',
+            name: 'Inglês'
+          },
+          {
+            code: 'es',
+            iso: 'es',
+            name: 'Espanhol'
+          }
+        ],
+
+        baseUrl: 'https://miguelceccarelli.com',
+        defaultLocale: 'br',
+
+        detectBrowserLanguage: {
+          useCookie: true,
+          cookieKey: 'i18n_redirected',
+          redirectOn: 'root',
+        },
+        
         vueI18n: {
           fallbackLocale: 'en',
           messages: {
@@ -74,7 +99,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: "http://localhost:8080/api/v1/"
+    baseURL: "https://miguelblog-api.glitch.me/api/v2/"
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

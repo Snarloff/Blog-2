@@ -9,7 +9,7 @@
 
       <router-link
         class="blog__button"
-        to="/lerartigo"
+        :to="localePath({name: 'blog-article-slug', params: {slug: slug}})"
       >
         Ler Mais
       </router-link>

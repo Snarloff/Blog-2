@@ -51,7 +51,7 @@
               <a  href="/#about" class="footer__link">Sobre</a>
             </li>
             <li class="footer__list">
-              <NuxtLink class="footer__link" to="/blog">Blog</NuxtLink>
+              <NuxtLink class="footer__link" :to="localePath('/blog')">Blog</NuxtLink>
             </li>
             <li class="footer__list">
               <a target="_blank" href="https://wa.me/5521992189718?%20text=Ola,%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr%20Ceccarelli" class="footer__link">Contato</a>
@@ -68,7 +68,7 @@
               <a target="_blank" href="/#appointment" class="footer__link">Agendamentos</a>
             </li>
             <li class="footer__list">
-              <NuxtLink to="/privacy" class="footer__link">Política de privacidade</NuxtLink>
+              <NuxtLink :to="localePath('/privacy')" class="footer__link">Política de privacidade</NuxtLink>
             </li>
           </ul>
         </div>

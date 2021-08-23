@@ -13,7 +13,7 @@
           <p class="miniArticle__description">{{ article.short }} </p>
         </div>
 
-        <router-link class="miniArticle__button" :to="{ name: 'blog-article-slug', params: { slug: article.slug } }">Ler mais  ➔</router-link>
+        <router-link class="miniArticle__button" :to="localePath({ name: 'blog-article-slug', params: { slug: article.slug } })">Ler mais  ➔</router-link>
 
       </div>
     </div>

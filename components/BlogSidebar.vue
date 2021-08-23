@@ -14,7 +14,7 @@
     <ul class="dropdown-menu">
       <li v-for="subcategory in subcategories" :key="subcategory.id">
         <div v-if="subcategory.categoryId == category.id">
-          <router-link class="dropdown-item" :to="{ name: 'blog-subcategory-id', params: { id: subcategory.id } }">{{ subcategory.title }}</router-link>
+          <router-link class="dropdown-item" :to="localePath({ name: 'blog-subcategory-id', params: { id: subcategory.id } })">{{ subcategory.title }}</router-link>
         <router-view :key="$nuxt.$route.path" />
       </div>
     </li>

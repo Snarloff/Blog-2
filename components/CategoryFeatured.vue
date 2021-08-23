@@ -5,7 +5,7 @@
     <div class="miniArticle__article--box">
       <div class="miniArticle_article" v-for="subcategory in data" :key="subcategory.id">
         <h4 class="miniArticle_subtitle">{{ subcategory.title }}</h4>
-        <router-link class="miniArticle_button" :to="{ name: 'blog-subcategory-id', params: { id: subcategory.id } }">Ler mais  ➔
+        <router-link class="miniArticle_button" :to="localePath({ name: 'blog-subcategory-id', params: { id: subcategory.id } })">Ler mais  ➔
      </router-link>
    </div>
 
