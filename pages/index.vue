@@ -1,0 +1,9 @@
+<template>
+  <section>
+    <LandingHeader/>
+    <LandingAbout/>
+    <LandingAppointment/>
+    <LandingBlog/>
+    <Footer/>
+  </section>
+</template>
