@@ -11,7 +11,7 @@
           telemedicina no Brasil e fora do país (atendo em português, espanhol e
           inglês).
         </p>
-        <router-link :to="{ name: 'blog-category-id', params: { id: 1 } }" class="about__link">Saber mais →</router-link>
+        <router-link :to="localePath({ name: 'blog-category-id', params: { id: 1 } })" class="about__link">Saber mais →</router-link>
       </div>
     </div>
     <div class="about__personal-data">

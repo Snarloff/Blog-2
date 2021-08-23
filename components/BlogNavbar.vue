@@ -177,9 +177,11 @@ export default {
   },
 
   methods: {
+    
     onEnter: function () {
-      this.$router.replace({ name: 'blog-search-query', params: { query: this.search } });
+      this.$router.push(this.localePath({ name: 'blog-search-query', params: { query: this.search } }))
     },
+
     toggleNav() {
       this.closeNav = !this.closeNav;
       const nav = this.$refs.nav.classList;
