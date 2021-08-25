@@ -10,6 +10,10 @@
 
       </div>
 
+      <a type="button" v-bind:href="socialmedias.whatsapp" class="btn btn-outline-success mr-2">Whatsapp</a>
+      <a type="button" target="blank" v-bind:href="socialmedias.facebook" class="btn btn-outline-primary mr-2">Facebook</a>
+      <a type="button" target="blank" v-bind:href="socialmedias.twitter" class="btn btn-outline-secondary mr-2">Twitter</a>
+      <button class="btn btn-outline-warning mr-2" @click="copyToClipBoard">Copy link</button>
 
     </article>
   </section>
@@ -26,7 +30,13 @@
         image: undefined,
         slug: undefined,
         body: undefined,
-        data: undefined
+        data: undefined,
+        socialmedias: {
+          facebook: `http://www.facebook.com/sharer.php?u=https://miguelceccarelli.com${this.$route.path}`,
+          twitter: `http://twitter.com/intent/tweet/?url=https://miguelceccarelli.com${this.$route.path}`,
+          link: `https://miguelceccarelli.com${this.$route.fullPath}`,
+          whatsapp: undefined
+        }
       }
     },
 
@@ -50,21 +60,30 @@
     methods: {
       async executeData(){
 
-        await this.$axios.post('/article/slug', { slug: this.$route.params.slug }).then((data) => {
+        await this.$axios.post('/article/slug', { slug: this.articleSlug }).then((data) => {
 
           if (!data['data']['data']['status']) {
             this.error = data['data']['data']['message']
           }
 
           this.title = data['data']['data']['title']
+          this.body = data['data']['data']['body']
           this.short = data['data']['data']['short']
           this.image = data['data']['data']['image']
           this.slug = data['data']['data']['slug']
-          this.body = data['data']['data']['body']
+
+          this.socialmedias.whatsapp = `whatsapp://send?text=*Dermatologista Dr. Miguel Ceccarelli*%0a%0a
+            ${data['data']['data']['short']}%0a%0aVeja este meu artigo sobre *${data['data']['data']['title']}* clicando no link abaixo. Não se esqueça de ver meus outros artigos, você vai se interessar!%0a%0a*Acesse:* https://miguelceccarelli.com${this.$route.fullPath}
+          `
 
       })
 
+      },
+
+      copyToClipBoard(){
+        navigator.clipboard.writeText(this.socialmedias.link)
       }
+
     }
   }
 </script>

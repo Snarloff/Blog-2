@@ -14,8 +14,8 @@
     <ul class="dropdown-menu">
       <li v-for="subcategory in subcategories" :key="subcategory.id">
         <div v-if="subcategory.categoryId == category.id">
-          <router-link class="dropdown-item" :to="localePath({ name: 'blog-subcategory-id', params: { id: subcategory.id } })">{{ subcategory.title }}</router-link>
-        <router-view :key="$nuxt.$route.path" />
+          <!-- <a href="#">Batata-Doce</a> -->
+          <NuxtLink class="dropdown-item" :to="localePath({ name: 'blog-subcategory-id', params: { id: subcategory.id } })">{{ subcategory.title }}</NuxtLink>
       </div>
     </li>
   </ul>
@@ -45,18 +45,28 @@ export default {
 
     await this.$axios.post('/category/all').then((data) => {
 
+      console.log(data);
+
       if (!data['data']['data']['status']) {
         this.error = data['data']['data']
+        console.log(data)
       }
       this.data = data['data']['data']
+    }).catch((err) => {
+      console.log(err)
     })
 
     await this.$axios.post('/subcategory/all').then((sub) => {
 
+      console.log(sub['data']['data']);
+
       if (!sub['data']['data']['status']) {
-        this.error = sub['data']
+        this.error = sub['data']['data']['message']
+        console.log(sub)
       }
       this.subcategories = sub['data']['data']
+    }).catch((err) => {
+      console.log(err)
     })
   }
 
