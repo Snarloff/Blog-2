@@ -13,21 +13,23 @@
     <nav class="header__menu">
       <ul class="menu__container">
         <li class="menu__card">
-          <router-link to="/" class="menu__link">
+          <NuxtLink :to="localePath('/')" class="menu__link">
             <img class="menu__img" alt="Ilustração do Dermatologista, Miguel Ceccarelli" src="../assets/capa--destaque.png">
             <p class="menu__text">Home</p>
 
-          </router-link>
+          </NuxtLink>
         </li>
 
         <li class="menu__card" v-for="category in data" :key="category.id">
-          <router-link class="menu__link" :to="localePath({name: 'blog-category-id', params: {
+          <NuxtLink class="menu__link" :to="localePath({name: 'blog-category-id', params: {
             id: category.id
           }})">
             <img class="menu__img" alt="Ilustração do Dermatologista, Miguel Ceccarelli" :src="category.image">
-            <p class="menu__text">{{ category.title }}</p>
+            <p class="menu__text" v-if="language == 'br' || language == undefined">{{ category.title }}</p>
+            <p class="menu__text" v-else-if="language == 'en'" >{{ category.titleEn }}</p>
+            <p class="menu__text" v-else>{{ category.titleEs }}</p>
 
-          </router-link>
+          </NuxtLink>
         </li>
 
       </ul>
@@ -44,6 +46,7 @@
         subcategories: undefined,
         error: undefined,
         search: undefined,
+        language: this.$nuxt.$i18n.locale
       }
     },
 

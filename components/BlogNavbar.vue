@@ -2,13 +2,13 @@
   <section class="info-bar">
     <div class="info-bar__container">
       <figure class="menu-mobile-img__container">
-        <!-- <router-link to="/" class="menu-mobile__link">
+        <!-- <NuxtLink to="/" class="menu-mobile__link">
           <img
             class="menu-mobile__img"
             src="~/assets/icon.svg
             "
           />
-        </router-link> -->
+        </NuxtLink> -->
       </figure>
       <ul class="info-bar__item">
          <li class="info-bar__list">
@@ -82,19 +82,19 @@
         <div class="menu-mobile__container" ref="nav">
           <ul class="menu-mobile__menu">
             <li class="menu__card">
-              <router-link :to="localePath('/')" class="menu__link">
+              <NuxtLink :to="localePath('/')" class="menu__link">
             <img class="menu__img" alt="Ilustração do Dermatologista, Miguel Ceccarelli" src="~/assets/capa--destaque.png">
 
                 <p class="menu__text">Home</p>
-              </router-link>
+              </NuxtLink>
             </li>
 
             <li class="menu__card" v-for="category in data" :key="category.id">
-               <router-link class="menu__link" :to="localePath('/')">
+               <NuxtLink class="menu__link" :to="localePath('/')">
             <img class="menu__img" alt="Ilustração do Dermatologista, Miguel Ceccarelli" :src="category.image">
 
                 <h2 class="menu__text">{{ category.title }}</h2>
-               </router-link>
+               </NuxtLink>
             </li>
           </ul>
           <ul class="info-bar__item--mobile">
@@ -177,7 +177,7 @@ export default {
   },
 
   methods: {
-    
+
     onEnter: function () {
       this.$router.push(this.localePath({ name: 'blog-search-query', params: { query: this.search } }))
     },

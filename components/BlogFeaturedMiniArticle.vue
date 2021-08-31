@@ -2,15 +2,26 @@
   <section class="miniArticle">
 
     <div class="miniArticle__article" v-for="article in data" :key="article.id">
-      <h4 class="miniArticle__subtitle">Em destaques / {{ article['subcategory.category.title'] }} / {{ article['subcategory.title'] }}</h4>
+      <h4 class="miniArticle__subtitle" v-if="language == 'br' || language == undefined">Em destaques / {{ article['subcategory.category.title'] }} / {{ article['subcategory.title'] }}</h4>
+      <h4 class="miniArticle__subtitle" v-else-if="language == 'en'">Em destaques / {{ article['subcategory.category.titleEn'] }} / {{ article['subcategory.titleEn'] }}</h4>
+      <h4 class="miniArticle__subtitle" v-else>Em destaques / {{ article['subcategory.category.titleEs'] }} / {{ article['subcategory.titleEs'] }}</h4>
       <div class="miniArticle__article-box">
         <figure class="miniArticle__img">
 
         <img :src="article.image" :alt="article.short" class="miniArticle__img object-fit">
+
         </figure>
-        <div class="miniArticle__articleInfos">
-          <h5 class="miniArticle__author">{{ article.title }}</h5>
+        <div class="miniArticle__articleInfos" v-if="language == 'br' || language == undefined">
+          <h5 class="miniArticle__author" >{{ article.title }}</h5>
           <p class="miniArticle__description">{{ article.short }} </p>
+        </div>
+        <div class="miniArticle__articleInfos" v-else-if="language == 'en'">
+          <h5 class="miniArticle__author" >{{ article.titleEn }}</h5>
+          <p class="miniArticle__description">{{ article.shortEn }} </p>
+        </div>
+        <div class="miniArticle__articleInfos" v-else>
+          <h5 class="miniArticle__author" >{{ article.titleEs }}</h5>
+          <p class="miniArticle__description">{{ article.shortEs }} </p>
         </div>
 
         <router-link class="miniArticle__button" :to="localePath({ name: 'blog-article-slug', params: { slug: article.slug } })">Ler mais  ➔</router-link>
@@ -28,33 +39,31 @@
       return {
         subcategory: undefined,
         category: undefined,
+        title: undefined,
         subcategoryId: String(this.$route.params.id),
+        language: this.$nuxt.$i18n.locale,
         data: undefined
       }
     },
 
-    head: {
-      title: 'my website title',
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'my website description'
-        }
-      ],
+    head() {
+      return {
+        title: this.title,
+        meta: [
+          { charset: 'utf-8' },
+          { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+          {
+            hid: 'description',
+            name: 'description',
+            content: 'my website description'
+          }
+        ],
+
+      }
     },
 
     created() {
       this.executeData()
-    },
-
-    watch: {
-      '$route.params.id': function(){
-        this.subcategoryId = String(this.$route.params.id),
-        this.executeData()
-      }
     },
 
     methods: {
@@ -63,11 +72,14 @@
 
         await this.$axios.post('/article/subcategory', { subcategoryId: this.subcategoryId }).then((data) => {
 
+          console.log(data['data']['data']);
+
             if (!data['data']['data']['status']) {
               this.error = data['data']['data']
             }
 
             this.data = data['data']['data']
+            this.title = data['data']['data'][0]['title']
         })
 
       }

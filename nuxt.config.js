@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -26,7 +28,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // './generator'
+    '@/modules/sitemapRouteGenerator'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -64,7 +66,7 @@ export default {
           cookieKey: 'i18n_redirected',
           redirectOn: 'root',
         },
-        
+
         vueI18n: {
           fallbackLocale: 'en',
           messages: {
@@ -84,12 +86,48 @@ export default {
     ]
   ],
 
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {
+    baseURL: 'https://miguelblog-api.glitch.me/api/v2/'
+    // proxy: true
+  },
+
   sitemap: {
     hostname: 'https://www.miguelceccarelli.com',
-    gzip: true,
-    exclude: [
-
+    path: '/sitemap.xml',
+    routes: [
+      '/', '/blog', '/privacy'
     ],
+    sitemaps: [
+      {
+        path: '/sitemap1.xml'
+      },
+      { /* Categorias */
+        path: '/categorias.xml',
+        exclude: [],
+        routes: async () => {
+          let result = await axios.post('https://miguelblog-api.glitch.me/api/v2/category/all')
+          return result.data.data.map(v => `/blog/category/${v.id}`)
+        }
+      },
+      { /* SubCategorias */
+        path: '/subcategorias.xml',
+        exclude: [],
+        routes: async () => {
+          let result = await axios.post('https://miguelblog-api.glitch.me/api/v2/subcategory/all')
+          return result.data.data.map(v => `/blog/subcategory/${v.id}`)
+        }
+      },
+      { /* Artigos */
+        path: '/artigos.xml',
+        exclude: [],
+        routes: async () => {
+          let result = await axios.post('https://miguelblog-api.glitch.me/api/v2/article/all')
+          return result.data.data.map(v => `/blog/article/${v.id}`)
+        }
+      },
+    ],
+
     defaults: {
       changefreq: 'daily',
       priority: 1,
@@ -97,10 +135,6 @@ export default {
     }
   },
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: "https://miguelblog-api.glitch.me/api/v2/"
-  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
@@ -110,3 +144,13 @@ export default {
     crawler: false // default - true
   }
 };
+
+
+// parsePages: false,
+// pages: {
+//   'blog/article/_slug': {
+//     br: 'blog/artigo/:slug',
+//     es: 'blog/articulo/:slug',
+//     en: 'blog/article/:slug'
+//   }
+// }

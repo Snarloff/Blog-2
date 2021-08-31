@@ -1,16 +1,30 @@
 <template>
 	<section class="blog" id="blog">
 		<div class="grid-blog">
-			 <h2 class="blog__title"><router-link class="blog__title" :to="localePath('/blog')">Visite nosso blog
-			</router-link></h2>
+			 <h2 class="blog__title"><NuxtLink class="blog__title" :to="localePath('/blog')">Visite nosso blog
+			</NuxtLink></h2>
 			<h3 class="blog__title" v-show="error != undefined">{{ error }}</h3>
 			<div class="blog__card" v-for="category in data" :key="category.id">
-				<router-link :to="localePath({name: 'blog-category-id', params: { id: category.id }})" class="blog__card-img">
-					<img class="blog__img" :src="category.image" :alt="category.title">
-				</router-link>
-			<h3 class="blog__title" >
-				<router-link class="blog__card-title" :to="localePath({name: 'blog-category-id', params: { id: category.id }})"> {{ category.title }}
-			</router-link> </h3>
+				<NuxtLink :to="localePath({name: 'blog-category-id', params: { id: category.id }})" class="blog__card-img">
+					<img v-if="language == 'br' || language == undefined" class="blog__img" :src="category.image" :alt="category.title">
+					<img v-else-if="language == 'en'" class="blog__img" :src="category.image" :alt="category.titleEn">
+					<img v-else class="blog__img" :src="category.image" :alt="category.titleEs">
+				</NuxtLink>
+			<h3 class="blog__title" v-if="language == 'br' || language == undefined">
+				<NuxtLink class="blog__card-title" :to="localePath({name: 'blog-category-id', params: { id: category.id }})">
+					{{ category.title }}
+				</NuxtLink>
+			</h3>
+			<h3 class="blog__title" v-else-if="language == 'en'">
+				<NuxtLink class="blog__card-title" :to="localePath({name: 'blog-category-id', params: { id: category.id }})">
+					{{ category.titleEn }}
+				</NuxtLink>
+			</h3>
+			<h3 class="blog__title" v-else>
+				<NuxtLink class="blog__card-title" :to="localePath({name: 'blog-category-id', params: { id: category.id }})">
+					{{ category.titleEs }}
+				</NuxtLink>
+			</h3>
 			</div>
 		</div>
 	</section>
@@ -23,7 +37,8 @@
 		data() {
 			return {
 				error: undefined,
-				data: undefined
+				data: undefined,
+				language: this.$nuxt.$i18n.locale
 			}
 		},
 

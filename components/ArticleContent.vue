@@ -1,12 +1,41 @@
 <template>
   <section class="Blog article">
     <article class="blog__article">
-      <h2 class="blog__title">Em destaque / {{ title }}</h2>
-      <img class="blog__img" :src="image" :alt="title">
 
-      <p class="blog__text">{{ short }}</p>
+      <div v-if="language == 'br' || language == undefined">
 
-      <div id="container" class="article__container" v-html="body">
+        <h2 class="blog__title">Em destaque / {{ title }}</h2>
+        <img class="blog__img" :src="image" :alt="title">
+
+        <p class="blog__text">{{ short }}</p>
+
+        <div id="container" class="article__container" v-html="body">
+
+        </div>
+
+      </div>
+      <div v-else-if="language == 'en'">
+
+        <h2 class="blog__title">Em destaque / {{ titleEn }}</h2>
+        <img class="blog__img" :src="image" :alt="titleEn">
+
+        <p class="blog__text">{{ shortEn }}</p>
+
+        <div id="container" class="article__container" v-html="bodyEn">
+
+        </div>
+
+      </div>
+      <div v-else>
+
+        <h2 class="blog__title">Em destaque / {{ titleEs }}</h2>
+        <img class="blog__img" :src="image" :alt="titleEs">
+
+        <p class="blog__text">{{ shortEs }}</p>
+
+        <div id="container" class="article__container" v-html="bodyEs">
+
+        </div>
 
       </div>
 
@@ -25,12 +54,17 @@
     data(){
       return {
         articleSlug: this.$route.params.slug,
-        title: undefined,
+        language: this.$nuxt.$i18n.locale,
         short: undefined,
+        shortEn: undefined,
+        shortEs: undefined,
         image: undefined,
         slug: undefined,
         body: undefined,
         data: undefined,
+        title: undefined,
+        titleEn: undefined,
+        titleEs: undefined,
         socialmedias: {
           facebook: `http://www.facebook.com/sharer.php?u=https://miguelceccarelli.com${this.$route.path}`,
           twitter: `http://twitter.com/intent/tweet/?url=https://miguelceccarelli.com${this.$route.path}`,
@@ -67,7 +101,11 @@
           }
 
           this.title = data['data']['data']['title']
+          this.titleEn = data['data']['data']['titleEn']
+          this.titleEs = data['data']['data']['titleEs']
           this.body = data['data']['data']['body']
+          this.bodyEn = data['data']['data']['bodyEn']
+          this.bodyEs = data['data']['data']['bodyEs']
           this.short = data['data']['data']['short']
           this.image = data['data']['data']['image']
           this.slug = data['data']['data']['slug']

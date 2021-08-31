@@ -8,9 +8,17 @@
 
           <img :src="article.image" :alt="article.short" class="miniArticle__img object-fit">
         </figure>
-        <div class="miniArticle__articleInfos">
+        <div class="miniArticle__articleInfos" v-if="language == 'br' || language == undefined">
           <h5 class="miniArticle__author">{{ article.title }}</h5>
           <p class="miniArticle__description">{{ article.short }} </p>
+        </div>
+        <div class="miniArticle__articleInfos" v-else-if="language == 'en'">
+          <h5 class="miniArticle__author">{{ article.titleEn }}</h5>
+          <p class="miniArticle__description">{{ article.shortEn }} </p>
+        </div>
+        <div class="miniArticle__articleInfos" v-else>
+          <h5 class="miniArticle__author">{{ article.titleEs }}</h5>
+          <p class="miniArticle__description">{{ article.shortEs }} </p>
         </div>
         <router-link class="miniArticle__button" :to="localePath({ name: 'blog-article-slug', params: { slug: article.slug } })">Ler mais  ➔</router-link>
       </div>
@@ -25,6 +33,7 @@ export default {
   data(){
     return {
       article: this.$route.params.slug || undefined,
+      language: this.$nuxt.$i18n.locale,
       data: undefined,
     }
   },

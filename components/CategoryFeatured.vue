@@ -4,14 +4,16 @@
     <h2 class="miniArticle__subtitle">{{categoryTitle}}</h2>
     <div class="miniArticle__article--box">
       <div class="miniArticle_article" v-for="subcategory in data" :key="subcategory.id">
-        <h4 class="miniArticle_subtitle">{{ subcategory.title }}</h4>
-        <router-link class="miniArticle_button" :to="localePath({ name: 'blog-subcategory-id', params: { id: subcategory.id } })">Ler mais  ➔
-     </router-link>
-   </div>
+        <h4 class="miniArticle_subtitle" v-if="language == 'br' || language == undefined">{{ subcategory.title }}</h4>
+        <h4 class="miniArticle_subtitle" v-else-if="language == 'en'">{{ subcategory.titleEn }}</h4>
+        <h4 class="miniArticle_subtitle" v-else>{{ subcategory.titleEs }}</h4>
+        <NuxtLink class="miniArticle_button" :to="localePath({ name: 'blog-subcategory-id', params: { id: subcategory.id } })">Ler mais  ➔
+        </NuxtLink>
+      </div>
 
- </div>
+    </div>
 
-</section>
+  </section>
 </template>
 
 <script>
@@ -36,6 +38,7 @@
       return {
         category: this.$route.params.id,
         categoryTitle: undefined,
+        language: this.$nuxt.$i18n.locale,
         data: undefined
       }
     },
@@ -43,13 +46,6 @@
     created() {
       this.executeData()
     },
-
-    // watch: {
-    //   '$route.params.id': function(){
-    //     this.category = this.$route.params.id
-    //     this.executeData()
-    //   }
-    // },
 
     methods: {
 
@@ -62,7 +58,22 @@
           }
 
           this.data = data['data']['data']
-          this.categoryTitle = data['data']['data'][0]['category.title'] || 'Não encontrado'
+
+          switch (this.language) {
+            case 'br':
+              this.categoryTitle = data['data']['data'][0]['category.title'] || 'Não encontrado'
+              break;
+            case 'en':
+              this.categoryTitle = data['data']['data'][0]['category.titleEn'] || 'Not found'
+              break;
+            case 'es':
+              this.categoryTitle = data['data']['data'][0]['category.titleEs'] || 'No encontrado'
+              break;
+            default:
+              this.categoryTitle = data['data']['data'][0]['category.title'] || 'Não encontrado'
+              break;
+          }
+
         })
 
       }
